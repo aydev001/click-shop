@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+    @apply px-[15px] py-[5px] rounded-md font-medium text-[16px]
+}
+
+.btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-500 text-white duration-150 active:scale-[0.98] hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600
+}
