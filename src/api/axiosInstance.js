@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const baseUrl = process.env.VITE_BASE_URL;
+
 const axiosInstance = axios.create({
-    baseURL: "https://yayraserver-production.up.railway.app/api",
+    baseURL: baseUrl,
     headers: {
         "Content-Type": "aplicatoion/json"
     }
