@@ -11,7 +11,7 @@ const Favourite = () => {
   return (
     <div className='p-[7px]'>
       {favourite.length > 0 ?
-        <div className='grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2 w-[95%] mx-auto max-w-[1400px]'>
+        <div className='grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2 w-[95%] mx-auto max-w-[1400px]'>
           {favourite.map(item => (
             <ProductCard key={item.id} item={item} categoryName={categories.find(catItem => catItem.id === item.categoryId)?.name} />
           ))}
