@@ -50,7 +50,6 @@ const CategorySlide = () => {
                     swiper.navigation.init();
                     swiper.navigation.update();
                 }}
-                speed = {1200}
                 breakpoints={{
                     0: {
                         slidesPerView: 2,  // 640px ekranlarda 1 ta slayd

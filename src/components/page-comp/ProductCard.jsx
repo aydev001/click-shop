@@ -31,10 +31,10 @@ const ProductCard = ({ item, categoryName }) => {
                 {categoryName}
             </div>
             <div className="flex justify-center items-center p-[10px] border-b-[1px]">
-                <img className='max-h-[200px] min-h-[200px] object-contain' src={item.image} alt={item.name} />
+                <img className='max-h-[170px] min-h-[170px] sm:max-h-[200px] sm:min-h-[200px] object-contain' src={item.image} alt={item.name} />
             </div>
             <div className='px-[10px] py-[7px] flex flex-col gap-2 justify-between flex-1 bg-slate-50 group-hover:bg-indigo-50 duration-100'>
-                <h3 className='text-[16px] font-semibold'>{item.name}</h3>
+                <h3 className='text-[14px] md:text-[16px] font-semibold'>{item.name}</h3>
                 <div className="flex justify-start items-center text-[12px] font-medium gap-1">
                     <div>
                         {item.rate}
