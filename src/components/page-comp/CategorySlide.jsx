@@ -10,15 +10,9 @@ import { motion} from "motion/react";
 
 const CategorySlide = () => {
     const { categories, loading, error } = useSelector(state => state.categories)
-    const nextButtonRef = useRef(null);
     const dispatch = useDispatch()
     const { selectCategoryId } = useSelector(state => state.actions)
 
-    const [key, setKey] = useState(0);
-
-    useEffect(() => {
-        setKey(prev => prev+1)
-    }, [selectCategoryId])
 
     return (
         <motion.div
@@ -43,12 +37,7 @@ const CategorySlide = () => {
                 spaceBetween={5}
                 slidesPerView={"auto"}
                 navigation={{
-                    nextEl: nextButtonRef.current,
-                }}
-                onInit={(swiper) => {
-                    swiper.params.navigation.nextEl = nextButtonRef.current;
-                    swiper.navigation.init();
-                    swiper.navigation.update();
+                    nextEl: ".swiper-button-next"
                 }}
                 breakpoints={{
                     0: {
@@ -84,7 +73,7 @@ const CategorySlide = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <button ref={nextButtonRef} className="cursor-pointer hover:text-indigo-600 hover:scale-110 active:scale-95">
+            <button className="swiper-button-next cursor-pointer hover:text-indigo-600 hover:scale-110 active:scale-95">
                 <IoIosArrowForward />
             </button>
         </motion.div>
