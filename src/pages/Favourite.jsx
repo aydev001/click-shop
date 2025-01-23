@@ -7,7 +7,6 @@ import { Link } from "react-router";
 const Favourite = () => {
   const { favourite } = useSelector(state => state.actions)
   const { categories } = useSelector(state => state.categories)
-  const dispatch = useDispatch()
   return (
     <div className='p-[7px]'>
       {favourite.length > 0 ?

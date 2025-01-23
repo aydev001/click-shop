@@ -9,7 +9,7 @@
 }
 
 .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-indigo-500 text-white duration-75 active:scale-95 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600
+    @apply bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 text-white duration-75 active:scale-95
 }
 
 /* width */

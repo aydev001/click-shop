@@ -1,34 +1,66 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-console.log(JSON.parse(localStorage.getItem("favourite")))
-
 const initialState = {
-    isModalAlert : false,
-    selectCategoryId : null,
-    favourite : JSON.parse(localStorage.getItem("favourite")) || [],
-    basket : []
+    isModalAlert: false,
+    selectCategoryId: null,
+    favourite: JSON.parse(localStorage.getItem("favourite-clickShop")) || [],
+    basket: JSON.parse(localStorage.getItem("basket-clickShop")) || [],
 }
 const actionSlice = createSlice({
-    name : "actions",
+    name: "actions",
     initialState,
-    reducers : {
-        setSelectCategory : (state, action) =>{
+    reducers: {
+        setSelectCategory: (state, action) => {
             state.selectCategoryId = action.payload
         },
-        setFavourite : (state, action) => {
-            if(state.favourite.find(item => item.id === action.payload.id)) {
+        setFavourite: (state, action) => {
+            if (state.favourite.find(item => item.id === action.payload.id)) {
                 const favouriteItems = state.favourite.filter(item => item.id !== action.payload.id)
                 state.favourite = favouriteItems
-                localStorage.setItem("favourite", JSON.stringify(favouriteItems))
-            }else {
+                localStorage.setItem("favourite-clickShop", JSON.stringify(favouriteItems))
+            } else {
                 const favouriteItems = [...state.favourite, action.payload]
                 state.favourite = favouriteItems
-                localStorage.setItem("favourite", JSON.stringify(favouriteItems))
+                localStorage.setItem("favourite-clickShop", JSON.stringify(favouriteItems))
             }
+        },
+        setBasket: (state, action) => {
+            if (state.basket.find(item => item.id === action.payload.id)) {
+                const basketItems = state.basket.map(baskItem => {
+                    if (baskItem.id === action.payload.id) {
+                        return { ...baskItem, basketCount: baskItem.basketCount + 1 }
+                    } else {
+                        return baskItem
+                    }
+                })
+                state.basket = basketItems
+                localStorage.setItem("basket-clickShop", JSON.stringify(basketItems))
+            } else {
+                const { id, name, image, price } = action.payload
+                const basketItems = [...state.basket, { id, name, image, price, basketCount: 1 }]
+                state.basket = basketItems
+                localStorage.setItem("basket-clickShop", JSON.stringify(basketItems))
+            }
+        },
+        incrementItemBasket: (state, action) => {
+            const basketItems = state.basket.map(baskItem => {
+                if (baskItem.id === action.payload.id) {
+                    return { ...baskItem, basketCount: baskItem.basketCount>0? baskItem.basketCount - 1 : 0 }
+                } else {
+                    return baskItem
+                }
+            })
+            state.basket = basketItems.filter(item => item.basketCount !== 0)
+            localStorage.setItem("basket-clickShop", JSON.stringify(basketItems.filter(item => item.basketCount !== 0)))
+        },
+        removeItemBasket : (state, action) => {
+            const basketItems = state.basket.filter(item => item.id !== action.payload.id)
+            state.basket = basketItems
+            localStorage.setItem("basket-clickShop", JSON.stringify(basketItems))
         }
     },
 })
 
-export const {setSelectCategory, setFavourite} = actionSlice.actions
+export const { setSelectCategory, setFavourite, setBasket, incrementItemBasket, removeItemBasket } = actionSlice.actions
 
 export default actionSlice
