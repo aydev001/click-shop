@@ -26,7 +26,7 @@ const ProductDetail = () => {
         className='flex flex-col md:flex-row gap-[10px]'>
         <div className='flex-1 relative'>
           <img className='max-h-[450px] min-h-[300px] w-full h-full object-contain border-[1px] rounded-sm shadow-sm p-[5px]' src={selectProduct?.image} alt={selectProduct?.name} />
-          <div className="px-[10px] py-[5px] absolute top-[5px] right-[5px] font-medium text-[14px] bg-indigo-100 rounded-sm text-indigo-700 flex md:hidden justify-center items-center">
+          <div className="px-[10px] py-[5px] absolute top-[5px] right-[5px] font-semibold text-[12px] bg-indigo-800 bg-opacity-50 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
             {categories?.find(catItem => catItem.id === selectProduct?.categoryId)?.name}
           </div>
         </div>
