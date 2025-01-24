@@ -1,4 +1,4 @@
-import { BiCartAlt } from "react-icons/bi";
+import { MdOutlineShoppingCart } from "react-icons/md"; 
 import { AiOutlineHeart } from "react-icons/ai";
 import React from 'react'
 import logo from "../assets/logo.jpg"
@@ -27,7 +27,7 @@ const Header = () => {
                 </Link>
                 <Link to={"/basket"} className="flex cursor-pointer group justify-center items-center gap-[7px]">
                     <div className="flex text-[22px] relative justify-center items-center gap-[5px]">
-                        <BiCartAlt className="group-hover:text-indigo-600"/>
+                        <MdOutlineShoppingCart className="group-hover:text-indigo-600" />
                         <span className="text-[12px] absolute top-[-10px] pt-[2px] right-[-10px] font-semibold flex justify-center items-center w-[20px] h-[20px] bg-indigo-600 rounded-full text-white">
                             {basket.length}
                         </span>
