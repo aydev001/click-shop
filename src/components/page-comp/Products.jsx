@@ -8,7 +8,7 @@ const Products = () => {
     const { categories } = useSelector(state => state.categories)
     const { selectCategoryId } = useSelector(state => state.actions)
     return (
-        <div className='p-[7px]'>
+        <div className='py-[7px]'>
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2 w-[95%] mx-auto max-w-[1400px]'>
                 {selectCategoryId ?
                     products.filter(item => item.categoryId == selectCategoryId).map(item => (

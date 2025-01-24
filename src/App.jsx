@@ -1,3 +1,4 @@
+import { TbReload } from "react-icons/tb"; 
 import React, { useEffect } from 'react'
 import Header from './components/Header'
 import Content from './components/Content'
@@ -5,6 +6,9 @@ import { Outlet } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategories } from './store/categorySlice/categorySlice'
 import { fetchProducts } from './store/productSlice/productSlice'
+import { Player } from '@lottiefiles/react-lottie-player'
+import Loading from "./assets/loading.json"
+import Error from "./assets/error.json"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -22,10 +26,37 @@ const App = () => {
       <Content>
         {catLoading && proLoading ?
           <div className='min-h-[calc(100vh-150px)] flex justify-center items-center flex-col'>
-            <iframe src="https://lottie.host/embed/0465c3c9-c6b8-4b1a-a915-8a6e6c589485/rQCt48fMMK.lottie"></iframe>
+            <div className='max-w-[200px]'>
+              <Player
+                src={Loading}
+                loop
+                autoplay
+              />
+            </div>
           </div>
           :
-          <Outlet />}
+          catError && proError ?
+            <div className='flex justify-center items-center flex-col min-h-[calc(100vh-200px)]'>
+              <div className='max-w-[200px]'>
+                <Player
+                  src={Error}
+                  loop
+                  autoplay
+                />
+              </div>
+              <div className='text-gray-700 mb-[10px] text-center'>
+              There was an error retrieving information, please reload the page.
+              </div>
+              <button onClick={() => window.location.href = "/"} className="flex justify-center items-center gap-1 px-[10px] py-[5px] bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-md text-[14px] font-medium">
+                <span className="text-[18px]">
+                 <TbReload />
+                </span>
+                <span>Reload the page</span>
+              </button>
+            </div>
+            :
+            <Outlet />
+        }
       </Content>
     </div>
   )

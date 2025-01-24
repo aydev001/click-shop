@@ -6,6 +6,7 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { motion } from 'motion/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBasket, setFavourite } from '../../store/actionSlice/actionSlice'
+import { useNavigate } from "react-router";
 
 const ProductCard = ({ item, categoryName }) => {
     const { selectCategoryId, favourite, basket } = useSelector(state => state.actions)
@@ -16,15 +17,21 @@ const ProductCard = ({ item, categoryName }) => {
         setKey(prev => prev + 1)
     }, [selectCategoryId])
     const checkFavItem = favourite.find(favItem => favItem.id === item.id)
+
+    const navigate = useNavigate()
     return (
         <motion.div
+            onClick={() => navigate(`/product/${item.id}`)}
             key={key}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: [0, 1], y: [30, -10, 0] }}
             viewport={{ once: false, amount: 0.1 }}
             transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
             className='border-[1px] cursor-pointer group hover:border-indigo-100 h-full duration-100 flex flex-col rounded-md overflow-hidden shadow-sm bg-white relative text-gray-700'>
-            <button onClick={() => dispatch(setFavourite(item))} className={`w-[35px] h-[35px] flex justify-center items-center bg-black text-[18px] duration-150 text-white hover:scale-105 border-[1px] ${checkFavItem ? "border-red-400 bg-opacity-15" : "border-gray-200 bg-opacity-20"} hover:bg-opacity-15 rounded-full absolute top-[7px] right-[7px] active:scale-100`}>
+            <button onClick={(e) => {
+                e.stopPropagation()
+                dispatch(setFavourite(item))
+            }} className={`w-[35px] h-[35px] flex justify-center items-center bg-black text-[18px] duration-150 text-white hover:scale-105 border-[1px] ${checkFavItem ? "border-red-400 bg-opacity-15" : "border-gray-200 bg-opacity-20"} hover:bg-opacity-15 rounded-full absolute top-[7px] right-[7px] active:scale-100`}>
                 {checkFavItem ? <AiFillHeart className="text-red-500" /> : <AiOutlineHeart />}
             </button>
             <div className='absolute text-[12px] font-medium bg-black shadow-sm bg-opacity-45 text-white top-[10px] left-[10px] py-[2px] px-[5px] rounded-sm'>
@@ -53,7 +60,10 @@ const ProductCard = ({ item, categoryName }) => {
                         </div>
                     </div>
                     <div className="relative">
-                        <button onClick={() => dispatch(setBasket(item))} className="w-[38px] h-[38px] flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-gradient-to-r active:from-blue-600 active:to-indigo-700">
+                        <button onClick={(e) => {
+                            e.stopPropagation()
+                            dispatch(setBasket(item))
+                        }} className="w-[38px] h-[38px] flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-gradient-to-r active:from-blue-600 active:to-indigo-700">
                             <MdAddShoppingCart />
                         </button>
                         {baskCount &&
