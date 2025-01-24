@@ -17,7 +17,7 @@ const ProductDetail = () => {
   const baskCount = basket?.find(baskItem => baskItem?.id === selectProduct?.id)
   const checkFavItem = favourite?.find(favItem => favItem?.id === selectProduct?.id)
   return (
-    <div className='p-[10px] text-gray-800 w-full lg:w-[90%] mx-auto max-w-[1400px]'>
+    <div className='p-[10px] text-gray-800 w-full lg:w-[95%] mx-auto max-w-[1400px]'>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: [0, 1], y: [30, -10, 0] }}

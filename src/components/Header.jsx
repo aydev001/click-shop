@@ -4,9 +4,11 @@ import React from 'react'
 import logo from "../assets/logo.jpg"
 import { Link } from "react-router";
 import SearchInput from "./page-comp/SearchInput";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openModalAlert } from "../store/actionSlice/actionSlice";
 
 const Header = () => {
+    const dispatch = useDispatch()
     const { favourite, basket } = useSelector(state => state.actions)
     const allPrice = basket.map(baskItem => baskItem.price*baskItem.basketCount)
     const totalPrice = allPrice.length>0? allPrice.reduce((sum, item) => sum + item) : 0
@@ -35,7 +37,7 @@ const Header = () => {
                     <span className="text-[14px] font-semibold">${Number(totalPrice).toLocaleString()}.00</span>
                 </Link>
                 <div>
-                    <button className="btn btn-primary">
+                    <button onClick={() => dispatch(openModalAlert("login"))} className="btn btn-primary">
                         Login
                     </button>
                 </div>

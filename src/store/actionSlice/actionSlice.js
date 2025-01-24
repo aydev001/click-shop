@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isModalAlert: false,
+    modalContent : "",
     selectCategoryId: null,
     favourite: JSON.parse(localStorage.getItem("favourite-clickShop")) || [],
     basket: JSON.parse(localStorage.getItem("basket-clickShop")) || [],
@@ -10,6 +11,14 @@ const actionSlice = createSlice({
     name: "actions",
     initialState,
     reducers: {
+        openModalAlert: (state, action) => {
+            state.modalContent = action.payload
+            state.isModalAlert = true
+        },
+        closeModalAlert: (state) => {
+            state.isModalAlert = false
+            state.modalContent = ""
+        },
         setSelectCategory: (state, action) => {
             state.selectCategoryId = action.payload
         },
@@ -45,7 +54,7 @@ const actionSlice = createSlice({
         incrementItemBasket: (state, action) => {
             const basketItems = state.basket.map(baskItem => {
                 if (baskItem.id === action.payload.id) {
-                    return { ...baskItem, basketCount: baskItem.basketCount>0? baskItem.basketCount - 1 : 0 }
+                    return { ...baskItem, basketCount: baskItem.basketCount > 0 ? baskItem.basketCount - 1 : 0 }
                 } else {
                     return baskItem
                 }
@@ -53,7 +62,7 @@ const actionSlice = createSlice({
             state.basket = basketItems.filter(item => item.basketCount !== 0)
             localStorage.setItem("basket-clickShop", JSON.stringify(basketItems.filter(item => item.basketCount !== 0)))
         },
-        removeItemBasket : (state, action) => {
+        removeItemBasket: (state, action) => {
             const basketItems = state.basket.filter(item => item.id !== action.payload.id)
             state.basket = basketItems
             localStorage.setItem("basket-clickShop", JSON.stringify(basketItems))
@@ -61,6 +70,6 @@ const actionSlice = createSlice({
     },
 })
 
-export const { setSelectCategory, setFavourite, setBasket, incrementItemBasket, removeItemBasket } = actionSlice.actions
+export const { setSelectCategory, setFavourite, setBasket, incrementItemBasket, removeItemBasket, openModalAlert, closeModalAlert } = actionSlice.actions
 
 export default actionSlice

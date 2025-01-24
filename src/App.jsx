@@ -9,6 +9,7 @@ import { fetchProducts } from './store/productSlice/productSlice'
 import { Player } from '@lottiefiles/react-lottie-player'
 import Loading from "./assets/loading.json"
 import Error from "./assets/error.json"
+import ModalAlert from "./components/page-comp/ModalAlert";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -58,6 +59,7 @@ const App = () => {
             <Outlet />
         }
       </Content>
+      <ModalAlert/>
     </div>
   )
 }

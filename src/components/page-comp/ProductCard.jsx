@@ -59,11 +59,13 @@ const ProductCard = ({ item, categoryName }) => {
                             <span>$ {Number(item.price).toLocaleString()}.00</span>
                         </div>
                     </div>
-                    <div className="relative">
-                        <button onClick={(e) => {
+                    <div
+                        onClick={(e) => {
                             e.stopPropagation()
                             dispatch(setBasket(item))
-                        }} className="w-[38px] h-[38px] flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-gradient-to-r active:from-blue-600 active:to-indigo-700">
+                        }}
+                        className="relative active:scale-95 duration-100">
+                        <button className="w-[38px] h-[38px] flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-gradient-to-r active:from-blue-600 active:to-indigo-700">
                             <MdAddShoppingCart />
                         </button>
                         {baskCount &&

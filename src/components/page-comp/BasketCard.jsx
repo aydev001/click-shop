@@ -13,7 +13,7 @@ const BasketCard = ({ item }) => {
                 <CgClose />
             </button>
             <div>
-                <img className='max-h-[100px] min-h-[100px] max-w-[100px] rounded-sm' src={item.image} alt={item.name} />
+                <img className='max-h-[100px] min-h-[100px] max-w-[100px] rounded-sm object-contain' src={item.image} alt={item.name} />
             </div>
             <div className='flex-[1]'>
                 <h3 onClick={() => navigate(`/product/${item.id}`)}  className='cursor-pointer text-[14px] md:text-[16px] font-semibold hover:text-indigo-700'>{item.name}</h3>
