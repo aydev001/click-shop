@@ -2,9 +2,12 @@ import { RxEyeOpen } from "react-icons/rx";
 import { RxEyeClosed } from "react-icons/rx";
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { openModalAlert } from '../../store/actionSlice/actionSlice'
+import { closeModalAlert, openModalAlert } from '../../store/actionSlice/actionSlice'
 import { Formik } from 'formik';
 import * as Yup from "yup"
+import { errorToast, succsessToast } from "../../services/toastService";
+import axios from "axios";
+import { fetchUserProfile } from "../../store/userSlice/userSlice";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -25,8 +28,22 @@ const Login = () => {
             <Formik
                 initialValues={{ email: "", password: "" }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmiting }) => {
-                    console.log(values)
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    const baseURL = process.env.VITE_LOCAL_URL
+                    try {
+                        setSubmitting(true)
+                        const res = await axios.post(`${baseURL}/users/login`, values)
+                        localStorage.setItem("authToken", res.data.token)
+                        setSubmitting(false)
+                        resetForm()
+                        dispatch(closeModalAlert())
+                        dispatch(fetchUserProfile())
+                        succsessToast("You have successfully logged in")
+                    } catch (error) {
+                        console.log(error)
+                        setSubmitting(false)
+                        errorToast(error.response?.data.message)
+                    }
                 }}
             >
                 {({
@@ -81,8 +98,10 @@ const Login = () => {
                             </div>
                         </div>
                         <hr />
-                        <button type='submit' disabled={isSubmitting} className='bg-indigo-600 w-full hover:bg-indigo-700 active:scale-95 duration-150 text-white font-medium px-[10px] py-[5px] rounded-sm '>
-                            Login
+                        <button type='submit' disabled={isSubmitting} className={`${isSubmitting ? "cursor-wait" : "cursor-pointer"} flex justify-center items-center gap-1 bg-indigo-600 w-full hover:bg-indigo-700 active:scale-95 duration-150 text-white font-medium px-[10px] py-[5px] rounded-sm`}>
+                            <span>
+                                {isSubmitting ? "Login..." : "Login"}
+                            </span>
                         </button>
                         <div className='flex justify-center gap-1 text-[14px]'>
                             <span>Don't have an account? </span> <span onClick={() => dispatch(openModalAlert("sign-up"))} className='font-medium cursor-pointer hover:text-indigo-600 hover:underline text-indigo-500'>Sign up now!</span>

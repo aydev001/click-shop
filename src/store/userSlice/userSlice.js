@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../api/axiosInstance";
+import axios from "axios";
 
 const initialState = {
-    users : [],
+    users: [],
+    userProfile: null,
     loading: false,
-    error : null
+    error: null
 }
 
 export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
@@ -12,17 +14,42 @@ export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
     return responce.data
 })
 
+export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async () => {
+    const token = localStorage.getItem("authToken")
+    if (token) {
+        const baseUrl = process.env.VITE_LOCAL_URL
+        const responce = await axios.get(`${baseUrl}/users/get-one`, {
+            headers:
+            {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return responce.data
+    } else {
+        return null
+    }
+})
+
 const userSlice = createSlice({
-    name : "users",
+    name: "users",
     initialState,
-    reducers : {},
-    extraReducers : (builder) => {
+    reducers: {},
+    extraReducers: (builder) => {
         builder.addCase(fetchUsers.pending, (state) => {
             state.loading = true
         }).addCase(fetchUsers.fulfilled, (state, action) => {
             state.loading = false,
-            state.categories = action.payload
+                state.users = action.payload
         }).addCase(fetchUsers.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
+        builder.addCase(fetchUserProfile.pending, (state) => {
+            state.loading = true
+        }).addCase(fetchUserProfile.fulfilled, (state, action) => {
+            state.loading = false,
+            state.userProfile = action.payload
+        }).addCase(fetchUserProfile.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
         })

@@ -4,6 +4,8 @@ import { openModalAlert } from '../../store/actionSlice/actionSlice'
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx'
 import { Formik } from 'formik';
 import * as Yup from "yup"
+import { errorToast, succsessToast } from '../../services/toastService';
+import axios from 'axios';
 
 const SignUp = () => {
     const dispatch = useDispatch()
@@ -29,8 +31,20 @@ const SignUp = () => {
             <Formik
                 initialValues={{ userName: "", email: "", password: "" }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmiting }) => {
-                    console.log(values)
+                onSubmit={async (values, { setSubmitting, resetForm}) => {
+                    const baseURL = process.env.VITE_LOCAL_URL
+                    try {
+                        setSubmitting(true)
+                        const res = await axios.post(`${baseURL}/users/register`, values)
+                        setSubmitting(false)
+                        resetForm()
+                        dispatch(openModalAlert("login"))
+                        succsessToast("You have successfully registered.")
+                    } catch (error) {
+                        console.log(error)
+                        setSubmitting(false)
+                        errorToast(error.response.data.message)
+                    }
                 }}
             >
                 {({
@@ -101,8 +115,10 @@ const SignUp = () => {
                             </div>
                         </div>
                         <hr />
-                        <button type='submit' disabled={isSubmitting} className='bg-indigo-600 w-full hover:bg-indigo-700 active:scale-95 duration-150 text-white font-medium px-[10px] py-[5px] rounded-sm '>
-                            Create account
+                        <button type='submit' disabled={isSubmitting} className={`${isSubmitting ? "cursor-wait" : "cursor-pointer"} flex justify-center items-center gap-1 bg-indigo-600 w-full hover:bg-indigo-700 active:scale-95 duration-150 text-white font-medium px-[10px] py-[5px] rounded-sm`}>
+                            <span>
+                                {isSubmitting ? "Creating..." : "Create account"}
+                            </span>
                         </button>
                         <div className='flex justify-center gap-1 text-[14px]'>
                             <span>Have an account? </span> <span onClick={() => dispatch(openModalAlert("login"))} className='font-medium cursor-pointer hover:text-indigo-600 hover:underline text-indigo-500'>Login now!</span>
