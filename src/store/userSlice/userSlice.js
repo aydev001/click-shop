@@ -17,7 +17,7 @@ export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
 export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async () => {
     const token = localStorage.getItem("authToken")
     if (token) {
-        const baseUrl = process.env.VITE_LOCAL_URL
+        const baseUrl = process.env.VITE_BASE_URL
         const responce = await axios.get(`${baseUrl}/users/get-one`, {
             headers:
             {

@@ -29,7 +29,7 @@ const Login = () => {
                 initialValues={{ email: "", password: "" }}
                 validationSchema={validationSchema}
                 onSubmit={async (values, { setSubmitting, resetForm }) => {
-                    const baseURL = process.env.VITE_LOCAL_URL
+                    const baseURL = process.env.VITE_BASE_URL
                     try {
                         setSubmitting(true)
                         const res = await axios.post(`${baseURL}/users/login`, values)
