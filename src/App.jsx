@@ -41,12 +41,13 @@ const App = () => {
           </div>
           :
           catError && proError ?
-            <div className='flex justify-center items-center flex-col min-h-[calc(100vh-200px)]'>
+            <div className='flex justify-center items-center flex-col min-h-[calc(100vh-100px)]'>
               <div className='max-w-[200px]'>
                 <Player
                   src={Error}
                   loop
                   autoplay
+                  className="max-h-[230px]"
                 />
               </div>
               <div className='text-gray-700 mb-[10px] text-center'>

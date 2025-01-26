@@ -28,10 +28,10 @@ const ProductDetail = () => {
         transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
         className='flex flex-col md:flex-row gap-[10px]'>
         <div className='flex-1 relative'>
-          <div className="min-h-[300px] md:min-h-[400px] w-full h-full border-[1px] rounded-sm shadow-sm p-[5px]">
+          <div className="w-full h-full  border-[1px] rounded-[5px] p-[5px] shadow-sm overflow-hidden">
             <InnerImageZoom src={selectProduct ? selectProduct.image : ""} zoomType="hover"/>
           </div>
-          <div className="px-[10px] py-[5px] absolute top-[5px] left-[5px] font-semibold text-[12px] bg-indigo-800 bg-opacity-55 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
+          <div className="px-[10px] py-[5px] absolute top-[10px] left-[10px] font-semibold text-[12px] bg-indigo-800 bg-opacity-55 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
             {categories?.find(catItem => catItem.id === selectProduct?.categoryId)?.name}
           </div>
         </div>
@@ -60,7 +60,7 @@ const ProductDetail = () => {
             <div className='flex justify-between items-center gap-1'>
               <div className='flex gap-1 items-center'>
                 <span className='font-medium'>price: </span>
-                <span className='font-semibold text-[18px] text-indigo-700'>$ {Number(selectProduct?.price).toLocaleString()}.00</span>
+                <span className='font-semibold text-[18px] text-indigo-700'>$ {Number(selectProduct?.price).toLocaleString()}</span>
               </div>
               <div className='flex gap-1 items-center'>
                 <span className='font-medium'>{selectProduct?.rate}</span>
