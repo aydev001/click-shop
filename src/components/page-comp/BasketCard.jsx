@@ -20,7 +20,7 @@ const BasketCard = ({ item }) => {
                 <div className='flex justify-between items-center'>
                     <p className='font-medium text-[14px]'>
                         <span>price: </span>
-                        <span className='font-semibold'>$ {Number(item.price).toLocaleString()}.00</span>
+                        <span className='font-semibold'>$ {Number(item.price).toLocaleString()}</span>
                     </p>
                 </div>
             </div>
@@ -38,7 +38,7 @@ const BasketCard = ({ item }) => {
                 </div>
                 <div className='flex justify-center text-[14px] items-center font-medium flex-col'>
                     <span>Total price</span>
-                    <span className='font-semibold'>$ {Number(item.price*item.basketCount).toLocaleString()}.00</span>
+                    <span className='font-semibold'>$ {Number(item.price*item.basketCount).toLocaleString()}</span>
                 </div>
             </div>
         </div>

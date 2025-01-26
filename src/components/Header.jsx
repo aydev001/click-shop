@@ -1,3 +1,4 @@
+import { CgSpinner } from "react-icons/cg"; 
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import React from 'react'
@@ -14,14 +15,10 @@ const Header = () => {
     const { favourite, basket } = useSelector(state => state.actions)
     const allPrice = basket.map(baskItem => baskItem.price * baskItem.basketCount)
     const totalPrice = allPrice.length > 0 ? allPrice.reduce((sum, item) => sum + item) : 0
-    const { userProfile } = useSelector(state => state.users)
+    const { userProfile, loading } = useSelector(state => state.users)
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: [0, 1], y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 }}
             className="border-[1px] bg-white rounded-lg max-h-[60px] min-h-[60px] flex justify-between items-center gap-1 p-[15px] shadow-sm">
             <Link to={"/"}>
                 <img className='h-[30px] sm:h-[35px] object-contain' src={logo} alt="logo" />
@@ -43,14 +40,14 @@ const Header = () => {
                             {basket.length}
                         </span>
                     </div>
-                    <span className="text-[14px] font-semibold">${Number(totalPrice).toLocaleString()}.00</span>
+                    <span className="text-[14px] font-semibold group-hover:text-indigo-600">${Number(totalPrice).toLocaleString()}{basket.length>0? "" : ".00"}</span>
                 </Link>
                 <div>
                     {userProfile ?
                         <ProfileButton userData={userProfile}/>
                         :
-                        <button onClick={() => dispatch(openModalAlert("login"))} className="btn btn-primary">
-                            Login
+                        <button disabled={loading} onClick={() => dispatch(openModalAlert("login"))} className="btn btn-primary flex justify-center items-center">
+                            {loading? <span className="animate-spin text-[22px] md:text-[24px]"><CgSpinner /></span> : <span>Login</span>}
                         </button>
                     }
 

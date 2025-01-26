@@ -28,14 +28,14 @@ const CheckoutCard = () => {
             The discount:
           </div>
           <div className='flex justify-start gap-1'>
-            <span className="line-through text-gray-600 font-medium">$ {Number(totalPrice + totalPrice * 0.1).toLocaleString()}.00</span>
+            <span className="line-through text-gray-600 font-medium">$ {Number(Number(totalPrice / 0.9).toFixed()).toLocaleString()}</span>
             <div className='px-[5px] bg-indigo-100 font-medium rounded-sm'>
               -10%
             </div>
           </div>
         </div>
         <div className='font-medium flex justify-between items-center'>
-          <span className='text-[14px]'>All total price:</span> <span className='font-semibold'>$ {Number(totalPrice).toLocaleString()}.00</span>
+          <span className='text-[14px]'>All total price:</span> <span className='font-semibold'>$ {Number(totalPrice).toLocaleString()}</span>
         </div>
       </div>
       <hr className='my-[5px]' />

@@ -12,6 +12,23 @@
     @apply bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-600 text-white duration-75 active:scale-95
 }
 
+.iiz {
+  height: 100%;
+}
+
+.iiz div {
+  height: 100%;
+  display: flex !important;
+  justify-content: center;
+  min-height: 300px !important;
+  min-width: 100% !important;
+  max-height: 450px;
+}
+
+.iiz div img {
+  object-fit: contain;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;

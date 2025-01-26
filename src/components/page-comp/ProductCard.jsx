@@ -53,10 +53,10 @@ const ProductCard = ({ item, categoryName }) => {
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col justify-between items-start">
                         <div className="text-[12px]">
-                            <span className="line-through font-medium text-gray-500">${item.price + item.price * 0.1}.00</span> <span className="bg-indigo-200 inline-block px-[2px] rounded-sm">-10%</span>
+                            <span className="line-through font-medium text-gray-500">$ {Number(Number(item.price / 0.9).toFixed()).toLocaleString()}</span> <span className="bg-indigo-200 inline-block px-[2px] rounded-sm">-10%</span>
                         </div>
-                        <div className="text-[16px] font-semibold">
-                            <span>$ {Number(item.price).toLocaleString()}.00</span>
+                        <div className="text-[18px] font-semibold">
+                            <span>$ {Number(item.price).toLocaleString()}</span>
                         </div>
                     </div>
                     <div

@@ -6,6 +6,8 @@ import { useParams } from 'react-router'
 import StarRating from '../components/page-comp/StarRaiting'
 import { setBasket, setFavourite } from "../store/actionSlice/actionSlice";
 import { motion } from "motion/react";
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -16,6 +18,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch()
   const baskCount = basket?.find(baskItem => baskItem?.id === selectProduct?.id)
   const checkFavItem = favourite?.find(favItem => favItem?.id === selectProduct?.id)
+
   return (
     <div className='p-[10px] text-gray-800 w-full lg:w-[95%] mx-auto max-w-[1400px]'>
       <motion.div
@@ -25,7 +28,9 @@ const ProductDetail = () => {
         transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
         className='flex flex-col md:flex-row gap-[10px]'>
         <div className='flex-1 relative'>
-          <img className='max-h-[450px] min-h-[300px] w-full h-full object-contain border-[1px] rounded-sm shadow-sm p-[5px]' src={selectProduct?.image} alt={selectProduct?.name} />
+          <div className="min-h-[300px] md:min-h-[400px] w-full h-full border-[1px] rounded-sm shadow-sm p-[5px]">
+            <InnerImageZoom src={selectProduct ? selectProduct.image : ""} zoomType="hover"/>
+          </div>
           <div className="px-[10px] py-[5px] absolute top-[5px] right-[5px] font-semibold text-[12px] bg-indigo-800 bg-opacity-50 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
             {categories?.find(catItem => catItem.id === selectProduct?.categoryId)?.name}
           </div>
