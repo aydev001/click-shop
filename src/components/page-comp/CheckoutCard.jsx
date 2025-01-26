@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const CheckoutCard = () => {
@@ -8,6 +8,10 @@ const CheckoutCard = () => {
   const allProduct = basket.map(baskItem => baskItem.basketCount)
   const allProductCount = allProduct.length > 0 ? allProduct.reduce((sum, prev) => sum + prev) : 0
   const totalPrice = allPrice.length > 0 ? allPrice.reduce((sum, item) => sum + item) : 0
+
+  const checkOutProducts = useCallback((products) => {
+    console.log(products)
+  }, [dispatch])
   return (
     <div>
       <h2 className='font-semibold'>
@@ -39,11 +43,9 @@ const CheckoutCard = () => {
         </div>
       </div>
       <hr className='my-[5px]' />
-      <div className='flex justify-end'>
-        <button className='px-[10px] w-full text-[14px] py-[7px] rounded-[5px] duration-100 bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-indigo-600 active:scale-95 text-white font-medium'>
-          CHECKOUT
-        </button>
-      </div>
+      <button onClick={() => checkOutProducts(basket)} className='px-[10px] w-full text-[14px] py-[7px] rounded-[5px] duration-100 bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-indigo-600 active:scale-95 text-white font-medium'>
+        CHECKOUT
+      </button>
     </div>
   )
 }

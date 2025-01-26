@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store.js';
 import HomeProducts from './pages/HomeProducts.jsx';
 import Home from './pages/Home.jsx';
+import UserProfile from './pages/UserProfile.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/favourite' element={<Favourite />} />
             <Route path='/basket' element={<Basket />} />
             <Route path='/products/:id' element={<ProductDetail />} />
+            <Route path='/profile' element={<UserProfile />} />
             <Route path='*' element={<NotFount />} />
           </Route>
         </Routes>

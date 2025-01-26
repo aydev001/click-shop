@@ -7,11 +7,12 @@ import { motion } from "motion/react";
 import { useDispatch } from "react-redux";
 import { fetchUserProfile } from "../../store/userSlice/userSlice";
 import { succsessToast } from "../../services/toastService";
+import { useNavigate } from "react-router";
 
 const ProfileButton = ({ userData }) => {
     const [isActive, setIsActive] = useState(false)
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const handleClickOutside = (event) => {
         if (!event.target.closest(".menu")) {
             setIsActive(false); // Menyu tashqarisiga bosilganda yopish
@@ -53,7 +54,10 @@ const ProfileButton = ({ userData }) => {
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.2, ease: "easeInOut", delay: 0.1 }}
                     className="absolute menu flex flex-col gap-1 bg-white p-[7px] text-gray-600 rounded-sm border-[1px] shadow-md z-[5] min-w-[150px] right-[-12px] bottom-[0] translate-y-[110%]">
-                    <button className="text-[14px] font-medium flex p-[5px] rounded-sm hover:bg-slate-100 justify-start items-center gap-1 active:scale-95">
+                    <button onClick={() => {
+                        setIsActive(false)
+                        navigate("/profile")
+                    }} className="text-[14px] font-medium flex p-[5px] rounded-sm hover:bg-slate-100 justify-start items-center gap-1 active:scale-95">
                         <span>
                             <BsPersonCircle />
                         </span>

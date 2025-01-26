@@ -21,7 +21,7 @@ const Header = () => {
         <motion.div
             className="border-[1px] bg-white rounded-lg max-h-[60px] min-h-[60px] flex justify-between items-center gap-1 p-[15px] shadow-sm">
             <Link to={"/"}>
-                <img className='h-[30px] sm:h-[35px] object-contain' src={logo} alt="logo" />
+                <img className='h-[30px] sm:h-[35px] object-contain active:scale-95 duration-100' src={logo} alt="logo" />
             </Link>
             <div className="flex justify-end items-center gap-[15px]">
                 <div className="hidden sm:block">
