@@ -44,7 +44,7 @@ const Basket = () => {
             <span className="text-[18px]">
               <BiLeftArrowAlt />
             </span>
-            <span>Product page</span>
+            <span>Products</span>
           </Link>
         </div>}
     </motion.div>

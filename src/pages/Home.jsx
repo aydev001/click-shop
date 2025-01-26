@@ -14,7 +14,7 @@ const Home = () => {
                     whileInView={{ opacity: [0, 1], y: [30, -10, 0] }}
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.7, ease: "easeInOut", delay: 0.2 }}
-                    className='text-[30px] md:text-[40px] lg:text-[45px] font-bold leading-[36px] md:leading-[50px] lg:leading-[55px] text-center mx-[5%] text-indigo-700 drop-shadow-md max-w-[900px]'>
+                    className='text-[30px] md:text-[40px] lg:text-[45px] font-bold leading-[36px] md:leading-[50px] lg:leading-[55px] text-center mx-[5%] text-indigo-700 drop-shadow-md max-w-[1000px]'>
                     Find life-easing technologies only at Click Shop!
                 </motion.h2>
                 <motion.p

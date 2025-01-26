@@ -1,8 +1,11 @@
+import { IoMdArrowBack } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
+import { BiLeftArrowAlt } from "react-icons/bi";
 import { MdAddShoppingCart } from "react-icons/md";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import StarRating from '../components/page-comp/StarRaiting'
 import { setBasket, setFavourite } from "../store/actionSlice/actionSlice";
 import { motion } from "motion/react";
@@ -29,18 +32,25 @@ const ProductDetail = () => {
         className='flex flex-col md:flex-row gap-[10px]'>
         <div className='flex-1 relative'>
           <div className="w-full h-full  border-[1px] rounded-[5px] p-[5px] shadow-sm overflow-hidden">
-            <InnerImageZoom src={selectProduct ? selectProduct.image : ""} zoomType="hover"/>
+            <InnerImageZoom src={selectProduct ? selectProduct.image : ""} zoomType="hover" />
           </div>
-          <div className="px-[10px] py-[5px] absolute top-[10px] left-[10px] font-semibold text-[12px] bg-indigo-800 bg-opacity-55 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
+          <div className="px-[10px] py-[5px] absolute top-[10px] left-[10px] font-semibold text-[12px] bg-indigo-800 bg-opacity-55 rounded-sm text-white backdrop-blur-[2px] flex justify-center items-center">
             {categories?.find(catItem => catItem.id === selectProduct?.categoryId)?.name}
           </div>
         </div>
         <div className='flex-[1.5] p-[10px] flex flex-col gap-[10px] justify-between'>
           <div className="hidden md:block">
             <div className='flex justify-between items-center gap-[10px]'>
-              <div className="px-[10px] py-[5px] font-medium text-[14px] bg-indigo-100 rounded-sm text-indigo-700 hidden md:flex justify-center items-center">
-                {categories?.find(catItem => catItem.id === selectProduct?.categoryId)?.name}
-              </div>
+              <Link to={"/products"}>
+                <button className="px-[10px] py-[5px] font-medium text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
+                  <div>
+                    <IoMdArrowBack />
+                  </div>
+                  <div>
+                    Back
+                  </div>
+                </button>
+              </Link>
               <button onClick={() => dispatch(setFavourite(selectProduct))} className='w-[35px] h-[35px] flex justify-center items-center border-[1px] border-red-400 active:scale-95 text-red-500 font-medium rounded-sm'>
                 <span className="text-[20px]">
                   {checkFavItem ? <AiFillHeart className="text-red-500" /> : <AiOutlineHeart />}

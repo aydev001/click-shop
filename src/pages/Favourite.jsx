@@ -39,7 +39,7 @@ const Favourite = () => {
             <span className="text-[18px]">
               <BiLeftArrowAlt />
             </span>
-            <span>Product page</span>
+            <span>Products</span>
           </Link>
         </motion.div>}
     </div>
