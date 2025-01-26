@@ -47,7 +47,7 @@ const Header = () => {
                         <ProfileButton userData={userProfile}/>
                         :
                         <button disabled={loading} onClick={() => dispatch(openModalAlert("login"))} className="btn btn-primary flex justify-center items-center">
-                            {loading? <span className="animate-spin text-[22px] flex justify-center items-center py-[1px]"><CgSpinner /></span> : <span>Login</span>}
+                            {loading? <span className="animate-spin text-[22px] flex justify-center items-center py-[1px]"><CgSpinner /></span> : <span className="px-[10px]">Login</span>}
                         </button>
                     }
 
