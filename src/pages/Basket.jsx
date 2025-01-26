@@ -40,11 +40,11 @@ const Basket = () => {
           <div className='text-gray-700 mb-[10px] text-center'>
             Your basket products are not available.
           </div>
-          <Link to={"/"} className="flex justify-center items-center gap-1 px-[10px] py-[5px] bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-md text-[14px] font-medium">
+          <Link to={"/products"} className="flex justify-center items-center gap-1 px-[10px] py-[5px] bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-md text-[14px] font-medium">
             <span className="text-[18px]">
               <BiLeftArrowAlt />
             </span>
-            <span>Home page</span>
+            <span>Product page</span>
           </Link>
         </div>}
     </motion.div>

@@ -21,7 +21,7 @@ const ProductCard = ({ item, categoryName }) => {
     const navigate = useNavigate()
     return (
         <motion.div
-            onClick={() => navigate(`/product/${item.id}`)}
+            onClick={() => navigate(`/products/${item.id}`)}
             key={key}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: [0, 1], y: [30, -10, 0] }}

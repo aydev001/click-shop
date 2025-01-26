@@ -1,3 +1,5 @@
+import { FaUserCircle } from "react-icons/fa"; 
+import { BsPersonSquare } from "react-icons/bs"; 
 import { CgLogIn } from "react-icons/cg";
 import { BsPersonCircle } from "react-icons/bs";
 import React, { useCallback, useEffect, useRef, useState } from 'react'
@@ -35,9 +37,9 @@ const ProfileButton = ({ userData }) => {
     }
     return (
         <div className="relative menu">
-            <button onClick={(e) => setIsActive(prev => !prev)} className="btn btn-primary flex justify-center items-center gap-1">
-                <span>
-                    <BsPersonCircle />
+            <button onClick={() => setIsActive(prev => !prev)} className="btn btn-primary flex justify-center items-center gap-1">
+                <span className="text-[16px]">
+                    <FaUserCircle />
                 </span>
                 <span>
                     Profile
