@@ -31,7 +31,7 @@ const ProductDetail = () => {
           <div className="min-h-[300px] md:min-h-[400px] w-full h-full border-[1px] rounded-sm shadow-sm p-[5px]">
             <InnerImageZoom src={selectProduct ? selectProduct.image : ""} zoomType="hover"/>
           </div>
-          <div className="px-[10px] py-[5px] absolute top-[5px] right-[5px] font-semibold text-[12px] bg-indigo-800 bg-opacity-50 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
+          <div className="px-[10px] py-[5px] absolute top-[5px] left-[5px] font-semibold text-[12px] bg-indigo-800 bg-opacity-55 rounded-sm text-white backdrop-blur-[2px] flex md:hidden justify-center items-center">
             {categories?.find(catItem => catItem.id === selectProduct?.categoryId)?.name}
           </div>
         </div>
