@@ -1,5 +1,8 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import axiosInstance from '../../api/axiosInstance'
+import { fetchUserOrders } from '../../store/userSlice/userSlice'
+import { errorToast, infoToast, succsessToast } from '../../services/toastService'
 
 const CheckoutCard = () => {
   const { basket } = useSelector(state => state.actions)
@@ -9,9 +12,27 @@ const CheckoutCard = () => {
   const allProductCount = allProduct.length > 0 ? allProduct.reduce((sum, prev) => sum + prev) : 0
   const totalPrice = allPrice.length > 0 ? allPrice.reduce((sum, item) => sum + item) : 0
 
-  const checkOutProducts = useCallback((products) => {
-    console.log(products)
-  }, [dispatch])
+  const [pending, setPending] = useState(false)
+
+  const bodyData = {
+    products: basket.map(item => {
+      return { name: item.name, image: item.image, price: item.price, quantity: item.basketCount }
+    })
+  }
+
+  const checkOutProducts = async (products) => {
+    try {
+      setPending(true)
+      await axiosInstance.post("/users/create-order", products)
+      dispatch(fetchUserOrders())
+      setPending(false)
+      succsessToast("Your orders have been sent.")
+    } catch (error) {
+      setPending(false)
+      errorToast(error.response.data?.message)
+    }
+  }
+
   return (
     <div>
       <h2 className='font-semibold'>
@@ -43,10 +64,12 @@ const CheckoutCard = () => {
         </div>
       </div>
       <hr className='my-[5px]' />
-      <button onClick={() => checkOutProducts(basket)} className='px-[10px] w-full text-[14px] py-[7px] rounded-[5px] duration-100 bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-indigo-600 active:scale-95 text-white font-medium'>
-        CHECKOUT
+      <button
+        disabled={pending} onClick={() => { checkOutProducts(bodyData) }}
+        className={`px-[10px] w-full text-[14px] ${pending ? "cursor-wait" : "cursor-pointer"} py-[7px] rounded-[5px] duration-100 bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-indigo-600 active:scale-95 text-white font-medium`}>
+        {pending ? "SENDING" : "CHECKOUT"}
       </button>
-    </div>
+    </div >
   )
 }
 

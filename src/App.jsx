@@ -11,7 +11,7 @@ import Loading from "./assets/loading.json"
 import Error from "./assets/error.json"
 import ModalAlert from "./components/page-comp/ModalAlert";
 import { ToastContainer } from 'react-toastify';
-import { fetchUserProfile } from "./store/userSlice/userSlice";
+import { fetchUserOrders, fetchUserProfile } from "./store/userSlice/userSlice";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -23,6 +23,7 @@ const App = () => {
     dispatch(fetchCategories())
     dispatch(fetchProducts())
     dispatch(fetchUserProfile())
+    dispatch(fetchUserOrders())
   }, [dispatch])
 
   return (

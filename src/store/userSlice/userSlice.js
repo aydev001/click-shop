@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
     users: [],
     userProfile: null,
+    orders: [],
     loading: false,
     error: null
 }
@@ -19,6 +20,22 @@ export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async () =>
     if (token) {
         const baseUrl = process.env.VITE_BASE_URL
         const responce = await axios.get(`${baseUrl}/users/get-one`, {
+            headers:
+            {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return responce.data
+    } else {
+        return null
+    }
+})
+
+export const fetchUserOrders = createAsyncThunk("fetchUserOrders", async () => {
+    const token = localStorage.getItem("authToken")
+    if (token) {
+        const baseUrl = process.env.VITE_BASE_URL
+        const responce = await axios.get(`${baseUrl}/users/get-orders`, {
             headers:
             {
                 Authorization: `Bearer ${token}`
@@ -48,8 +65,17 @@ const userSlice = createSlice({
             state.loading = true
         }).addCase(fetchUserProfile.fulfilled, (state, action) => {
             state.loading = false,
-            state.userProfile = action.payload
+                state.userProfile = action.payload
         }).addCase(fetchUserProfile.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
+        builder.addCase(fetchUserOrders.pending, (state) => {
+            state.loading = true
+        }).addCase(fetchUserOrders.fulfilled, (state, action) => {
+            state.loading = false,
+                state.orders = action.payload
+        }).addCase(fetchUserOrders.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
         })
