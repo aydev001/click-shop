@@ -41,7 +41,7 @@ const ProductDetail = () => {
         <div className='flex-[1.5] p-[10px] flex flex-col gap-[10px] justify-between'>
           <div className="hidden md:block">
             <div className='flex justify-between items-center gap-[10px]'>
-              <Link to={"/products"}>
+              <Link to={-1}>
                 <button className="px-[10px] py-[5px] font-medium text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
                   <div>
                     <IoMdArrowBack />

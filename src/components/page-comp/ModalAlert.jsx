@@ -10,7 +10,7 @@ const ModalAlert = () => {
     const { modalContent, isModalAlert } = useSelector(state => state.actions)
     const dispatch = useDispatch()
     return (
-        <div className={`${isModalAlert ? "flex" : "hidden"} overlay fixed z-20 top-0 bg-black bg-opacity-50 backdrop-blur-[2px] left-0 right-0 bottom-0  justify-center pt-[15vh] overflow-y-auto`}>
+        <div className={`${isModalAlert ? "flex" : "hidden"} overlay fixed z-20 top-0 bg-black bg-opacity-35 backdrop-blur-[1px] left-0 right-0 bottom-0  justify-center pt-[20vh] overflow-y-auto`}>
             <motion.div
                 initial={{ opacity: 0, y: 10, scale : 0.9 }}
                 whileInView={{ opacity: [0, 1], y: 0, scale:1 }}

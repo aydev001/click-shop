@@ -1,8 +1,6 @@
 import { Player } from '@lottiefiles/react-lottie-player'
 import React from 'react'
-import { Link } from 'react-router'
 import { motion } from 'motion/react'
-import { BiLeftArrowAlt } from 'react-icons/bi'
 import notFountAnimate from "../assets/not-fount.json"
 
 const NotFount = () => {

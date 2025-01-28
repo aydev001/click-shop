@@ -55,7 +55,7 @@ const ProductCard = ({ item, categoryName }) => {
                         <div className="text-[12px]">
                             <span className="line-through font-medium text-gray-500">$ {Number(Number(item.price / 0.9).toFixed()).toLocaleString()}</span> <span className="bg-indigo-200 inline-block px-[2px] rounded-sm">-10%</span>
                         </div>
-                        <div className="text-[18px] font-semibold">
+                        <div className="text-[16px] font-bold text-indigo-600">
                             <span>$ {Number(item.price).toLocaleString()}</span>
                         </div>
                     </div>

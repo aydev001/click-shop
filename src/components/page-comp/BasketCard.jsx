@@ -16,7 +16,7 @@ const BasketCard = ({ item }) => {
                 <img className='max-h-[100px] min-h-[100px] max-w-[100px] rounded-sm object-contain' src={item.image} alt={item.name} />
             </div>
             <div className='flex-[1]'>
-                <h3 onClick={() => navigate(`/product/${item.id}`)}  className='cursor-pointer text-[14px] md:text-[16px] font-semibold hover:text-indigo-700'>{item.name}</h3>
+                <h3 onClick={() => navigate(`/products/${item.id}`)}  className='cursor-pointer text-[14px] md:text-[16px] font-semibold hover:text-indigo-700'>{item.name}</h3>
                 <div className='flex justify-between items-center'>
                     <p className='font-medium text-[14px]'>
                         <span>price: </span>

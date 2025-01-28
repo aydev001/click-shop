@@ -1,5 +1,6 @@
-import { FaUserCircle } from "react-icons/fa"; 
-import { BsPersonSquare } from "react-icons/bs"; 
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+import { BsPersonSquare } from "react-icons/bs";
 import { CgLogIn } from "react-icons/cg";
 import { BsPersonCircle } from "react-icons/bs";
 import React, { useCallback, useEffect, useRef, useState } from 'react'
@@ -43,17 +44,17 @@ const ProfileButton = ({ userData }) => {
                     <FaUserCircle />
                 </span>
                 <span>
-                    Profile
+                    {userData.isAdmin ? "Admin" : "Profile"}
                 </span>
             </button>
             {
                 isActive &&
                 <motion.div
-                    initial={{ opacity: 0, y: 80, scale: 0.9 }}
-                    whileInView={{ opacity: [0, 1], y: 90, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: [0, 1], scale: 1 }}
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.2, ease: "easeInOut", delay: 0.1 }}
-                    className="absolute menu flex flex-col gap-1 bg-white p-[7px] text-gray-600 rounded-sm border-[1px] shadow-md z-[5] min-w-[150px] right-[-12px] bottom-[0] translate-y-[110%]">
+                    className="absolute menu flex flex-col gap-1 bg-white p-[7px] text-gray-600 rounded-sm border-[1px] top-[40px] shadow-md z-[5] min-w-[150px] right-[-12px]">
                     <button onClick={() => {
                         setIsActive(false)
                         navigate("/profile")
@@ -65,6 +66,21 @@ const ProfileButton = ({ userData }) => {
                             {truncateText(userData.userName, 12)}
                         </span>
                     </button>
+                    {
+                        userData.isAdmin &&
+                        <div>
+                            <hr className="mb-[3px]" />
+                            <button onClick={() => {
+                                setIsActive(false)
+                                navigate("/admin")
+                            }} className="flex justify-start hover:bg-slate-100 p-[5px] rounded-sm items-center gap-1 text-blue-600 w-full hover:text-blue-700 active:scale-95">
+                                <MdOutlineAdminPanelSettings />
+                                <span className="text-[14px] font-medium">
+                                    Dashboard
+                                </span>
+                            </button>
+                        </div>
+                    }
                     <hr />
                     <button onClick={() => logoutProfile()} className="flex justify-start hover:bg-slate-100 p-[5px] rounded-sm items-center gap-1 text-red-500 w-full hover:text-red-600 active:scale-95">
                         <CgLogIn />

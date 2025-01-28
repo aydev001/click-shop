@@ -73,7 +73,7 @@ const CategorySlide = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <button className="swiper-button-next cursor-pointer hover:text-indigo-600 hover:scale-110 active:scale-95">
+            <button className={`swiper-button-next cursor-pointer hover:text-indigo-600 hover:scale-110 active:scale-95`}>
                 <IoIosArrowForward />
             </button>
         </motion.div>

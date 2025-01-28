@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import axiosInstance from '../../api/axiosInstance'
 import { fetchUserOrders } from '../../store/userSlice/userSlice'
 import { errorToast, infoToast, succsessToast } from '../../services/toastService'
+import { removeAllItemBasket } from '../../store/actionSlice/actionSlice'
 
 const CheckoutCard = () => {
   const { basket } = useSelector(state => state.actions)
@@ -27,6 +28,7 @@ const CheckoutCard = () => {
       dispatch(fetchUserOrders())
       setPending(false)
       succsessToast("Your orders have been sent.")
+      dispatch(removeAllItemBasket())
     } catch (error) {
       setPending(false)
       errorToast(error.response.data?.message)

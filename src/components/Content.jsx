@@ -10,7 +10,7 @@ const Content = ({ children }) => {
     scrollCont.current.scrollTop = 0
   }, [selectCategoryId || pathname])
   return (
-    <div ref={scrollCont} className='border-[1px] bg-white rounded-lg relative min-h-[calc(100vh-77px)] max-h-[calc(100vh-77px)] shadow-sm overflow-y-auto overflow-x-hidden mt-[5px]'>
+    <div ref={scrollCont} className='border-[1px] bg-white flex-1 rounded-lg relative min-h-[calc(100vh-77px)] max-h-[calc(100vh-77px)] shadow-sm overflow-y-auto overflow-x-hidden mt-[5px]'>
       {children}
     </div>
   )

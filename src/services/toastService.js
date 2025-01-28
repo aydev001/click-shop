@@ -3,7 +3,7 @@ import { Bounce, toast } from "react-toastify";
 export const succsessToast = (title) => {
     toast.success(`${title}`, {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -16,7 +16,7 @@ export const succsessToast = (title) => {
 export const errorToast = (title) => {
     toast.error(`${title}`, {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -29,7 +29,7 @@ export const errorToast = (title) => {
 export const infoToast = (title) => {
     toast.info(`${title}`, {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
