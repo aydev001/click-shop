@@ -7,6 +7,7 @@ const initialState = {
     favourite: JSON.parse(localStorage.getItem("favourite-clickShop")) || [],
     basket: JSON.parse(localStorage.getItem("basket-clickShop")) || [],
     isSidebar : false,
+    selectItemId : null
 }
 const actionSlice = createSlice({
     name: "actions",
@@ -22,6 +23,9 @@ const actionSlice = createSlice({
         },
         setSelectCategory: (state, action) => {
             state.selectCategoryId = action.payload
+        },
+        setSelectItemId: (state, action) => {
+            state.selectItemId = action.payload
         },
         toggleSidebar: (state) => {
             state.isSidebar = !state.isSidebar
@@ -78,6 +82,6 @@ const actionSlice = createSlice({
     },
 })
 
-export const { setSelectCategory, setFavourite, setBasket, incrementItemBasket, removeItemBasket, openModalAlert, closeModalAlert, removeAllItemBasket, toggleSidebar } = actionSlice.actions
+export const { setSelectCategory, setFavourite, setBasket, incrementItemBasket, removeItemBasket, openModalAlert, closeModalAlert, removeAllItemBasket, toggleSidebar, setSelectItemId } = actionSlice.actions
 
 export default actionSlice

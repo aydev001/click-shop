@@ -7,24 +7,13 @@ import { errorToast, succsessToast } from "../../services/toastService";
 import axiosInstance from "../../api/axiosInstance";
 import { fetchUserOrders } from "../../store/userSlice/userSlice";
 import { motion } from "motion/react";
+import { Link } from "react-router";
+import { IoMdArrowBack } from "react-icons/io";
 
 
-const AllOrders = () => {
+const AdminUserOrders = () => {
     const { orders } = useSelector(state => state.users)
     const dispatch = useDispatch()
-    const [pending, setPending] = useState(false)
-    const clearOrderHistory = async () => {
-        try {
-            setPending(true)
-            await axiosInstance.post("/users/clear-orders")
-            dispatch(fetchUserOrders())
-            succsessToast("Order history cleared")
-            setPending(false)
-        } catch (error) {
-            setPending(false)
-            errorToast(error.response?.data?.message)
-        }
-    }
 
     return (
         <>
@@ -35,14 +24,6 @@ const AllOrders = () => {
                             <span className="flex justify-center items-center text-[18px]"><MdHistory /></span>
                             <span>Your order history</span>
                         </h1>
-                        <button disabled={pending} onClick={() => clearOrderHistory()} className={`${pending ? "cursor-wait" : "cursor-pointer"} flex justify-center items-center gap-1 text-[12px] font-semibold  px-[10px] py-[3px] border-indigo-200 duration-75 hover:shadow-sm hover:bg-indigo-200 active:scale-95 border-[1px] bg-indigo-100 rounded-sm`}>
-                            <span className="text-[14px]">
-                                <AiOutlineClear />
-                            </span>
-                            <span>
-                                {pending ? "Cleaning..." : "Clear history"}
-                            </span>
-                        </button>
                     </div>
                     <div className="flex flex-col-reverse gap-[10px]">
                         {orders.map((order) => (
@@ -97,16 +78,26 @@ const AllOrders = () => {
                     whileInView={{ opacity: [0, 1], y: [30, -10, 0] }}
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
-                    className="flex justify-center items-center flex-col text-gray-400 min-h-[calc(100vh-300px)]">
+                    className="flex justify-center items-center flex-col text-gray-600 min-h-[calc(100vh-200px)]">
                     <div className="text-[30px]">
                         <RiHistoryFill />
                     </div>
                     <div className="text-[14px] font-medium">
                         Your order history is empty
                     </div>
+                    <Link to={-1}>
+                        <button className="px-[10px] py-[5px] font-medium mt-[10px] text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
+                            <div>
+                                <IoMdArrowBack />
+                            </div>
+                            <div>
+                                Back
+                            </div>
+                        </button>
+                    </Link>
                 </motion.div>)}
         </>
     )
 }
 
-export default AllOrders
+export default AdminUserOrders

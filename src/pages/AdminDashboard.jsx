@@ -14,7 +14,7 @@ const AdminDashboard = () => {
         )
     }
     return (
-        <div className='p-[7px] text-gray-800'>
+        <div className=' text-gray-800'>
             <Outlet/>
         </div>
     )

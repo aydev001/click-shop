@@ -18,6 +18,7 @@ import AdminProducts from './pages/admin-pages/AdminProducts.jsx';
 import AdminCreateCategory from './pages/admin-pages/AdminCreateCategory.jsx';
 import AdminCreateProduct from './pages/admin-pages/AdminCreateProduct.jsx';
 import AdminUsers from './pages/admin-pages/AdminUsers.jsx';
+import AdminUserOrders from './pages/admin-pages/AdminUserOreders.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='/admin/create-category' element={<AdminCreateCategory/>}/>
               <Route path='/admin/create-product' element={<AdminCreateProduct/>}/>
               <Route path='/admin/users' element={<AdminUsers/>}/>
+              <Route path='/admin/users/:id' element={<AdminUserOrders/>}/>
             </Route>
             <Route path='*' element={<NotFount />} />
           </Route>

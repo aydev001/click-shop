@@ -5,7 +5,7 @@ const baseUrl = process.env.VITE_BASE_URL
 const axiosInstance = axios.create({
     baseURL: baseUrl,
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
     }
 })
 

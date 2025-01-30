@@ -1,3 +1,5 @@
+import { FcDataConfiguration } from "react-icons/fc"; 
+import { AiOutlineCodeSandbox } from "react-icons/ai"; 
 import { SiDash } from "react-icons/si";
 import React from 'react'
 import { btnData } from "../services/const";
@@ -16,15 +18,12 @@ const Sidebar = () => {
     }
     return (
         <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: [0, 1], y: [10, -5, 0] }}
+            initial={{ opacity: window.innerWidth>=768? 0 : 1, y: 10 }}
+            whileInView={{ opacity: 1, y: window.innerWidth >=768? [10, -5, 0]  : [0]}}
             viewport={{ once: false, amount: 0.1 }}
             transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
         >
-            <div className="flex justify-center items-center font-bold text-indigo-700 gap-1 italic">
-                <div>
-                    <SiDash />
-                </div>
+            <div className="flex justify-center items-center font-bold text-indigo-700 gap-1">
                 <div>
                     Dashboard
                 </div>
@@ -32,7 +31,7 @@ const Sidebar = () => {
             <hr className="my-[5px]" />
             <div className="flex flex-col gap-1">
                 {btnData.map(item => (
-                    <button onClick={() => handdleClick(item.path)} key={item.id} className={`${item.path === pathname ? "bg-indigo-500 border-indigo-600 text-white hover:bg-indigo-600" : "bg-white text-gray-700 hover:bg-indigo-100 hover:border-indigo-200"} duration-200 py-[3px] px-[15px] border-[1px]  active:scale-95 rounded-sm shadow-sm w-full flex justify-start font-semibold items-center gap-1 text-[14px]`}>
+                    <button onClick={() => handdleClick(item.path)} key={item.id} className={`${item.path === pathname ? "bg-indigo-500 border-indigo-600 text-white hover:bg-indigo-600" : "bg-white text-gray-700 hover:bg-indigo-100 hover:border-indigo-200"} duration-200 py-[5px] px-[15px] border-[1px]  active:scale-95 rounded-sm shadow-sm w-full flex justify-start font-semibold items-center gap-1 text-[14px]`}>
                         <div className="text-[16px] flex justify-center items-center">
                             {item.icon()}
                         </div>

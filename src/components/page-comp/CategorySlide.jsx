@@ -1,18 +1,19 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { BiCategoryAlt } from "react-icons/bi";
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation } from "swiper/modules";
 import { setSelectCategory } from "../../store/actionSlice/actionSlice";
 import { motion} from "motion/react";
+import { useLocation } from "react-router";
 
 const CategorySlide = () => {
-    const { categories, loading, error } = useSelector(state => state.categories)
+    const { categories } = useSelector(state => state.categories)
     const dispatch = useDispatch()
     const { selectCategoryId } = useSelector(state => state.actions)
-
+    const {pathname} = useLocation()
 
     return (
         <motion.div
@@ -26,7 +27,7 @@ const CategorySlide = () => {
                     <BiCategoryAlt />
                 </div>
                 <div className="font-semibold text-[12px] sm:text-[14px]">
-                    All <span className="hidden md:inline">Products</span>
+                    All <span className={`hidden ${pathname==="/products"? "md:inline" : "lg:inline"}`}>Products</span>
                 </div>
                 <div className={`absolute h-[3px] left-0 right-0 duration-75 bottom-0 ${selectCategoryId === null ? "bg-indigo-600" : "bg-slate-100"}`}>
 
@@ -47,13 +48,13 @@ const CategorySlide = () => {
                         slidesPerView: 3,  // 768px ekranlarda 2 ta slayd
                     },
                     838: {
-                        slidesPerView: 4,  // 768px ekranlarda 2 ta slayd
+                        slidesPerView: pathname === "/products"? 4 : 3,  // 768px ekranlarda 2 ta slayd
                     },
                     1024: {
-                        slidesPerView: 5,  // 768px ekranlarda 2 ta slayd
+                        slidesPerView: pathname === "/products"? 5 : 4,  // 768px ekranlarda 2 ta slayd
                     },
                     1200: {
-                        slidesPerView: 6,  // 1024px ekranlarda 3 ta slayd
+                        slidesPerView: pathname === "/products"? 6 : 5,  // 1024px ekranlarda 3 ta slayd
                     },
                 }}
             >

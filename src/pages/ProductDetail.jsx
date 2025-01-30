@@ -51,7 +51,7 @@ const ProductDetail = () => {
                   </div>
                 </button>
               </Link>
-              <button onClick={() => dispatch(setFavourite(selectProduct))} className='w-[35px] h-[35px] flex justify-center items-center border-[1px] border-red-400 active:scale-95 text-red-500 font-medium rounded-sm'>
+              <button onClick={() => dispatch(setFavourite(selectProduct))} className='w-[35px] h-[35px] flex justify-center hover:bg-red-50 items-center border-[1px] border-red-400 active:scale-95 text-red-500 font-medium rounded-sm'>
                 <span className="text-[20px]">
                   {checkFavItem ? <AiFillHeart className="text-red-500" /> : <AiOutlineHeart />}
                 </span>

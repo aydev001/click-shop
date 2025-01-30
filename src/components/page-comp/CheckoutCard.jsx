@@ -24,7 +24,11 @@ const CheckoutCard = () => {
   const checkOutProducts = async (products) => {
     try {
       setPending(true)
-      await axiosInstance.post("/users/create-order", products)
+      await axiosInstance.post("/users/create-order", products, {
+        headers : {
+          "Content-Type" : "application/json"
+        }
+      })
       dispatch(fetchUserOrders())
       setPending(false)
       succsessToast("Your orders have been sent.")

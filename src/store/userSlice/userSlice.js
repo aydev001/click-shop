@@ -1,18 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../api/axiosInstance";
 import axios from "axios";
 
 const initialState = {
     users: [],
     userProfile: null,
     orders: [],
+    allOrders : [],
     loading: false,
     error: null
 }
 
 export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
-    const responce = await axiosInstance.get("/users/get")
-    return responce.data
+    const token = localStorage.getItem("authToken")
+    if (token) {
+        const baseUrl = process.env.VITE_BASE_URL
+        const responce = await axios.get(`${baseUrl}/users/get`, {
+            headers:
+            {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return responce.data
+    } else {
+        return null
+    }
 })
 
 export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async () => {
@@ -32,6 +43,22 @@ export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async () =>
 })
 
 export const fetchUserOrders = createAsyncThunk("fetchUserOrders", async () => {
+    const token = localStorage.getItem("authToken")
+    if (token) {
+        const baseUrl = process.env.VITE_BASE_URL
+        const responce = await axios.get(`${baseUrl}/users/get-orders`, {
+            headers:
+            {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return responce.data
+    } else {
+        return null
+    }
+})
+
+export const fetchUserAllOrders = createAsyncThunk("fetchUserAllOrders", async () => {
     const token = localStorage.getItem("authToken")
     if (token) {
         const baseUrl = process.env.VITE_BASE_URL

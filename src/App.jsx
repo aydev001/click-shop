@@ -11,7 +11,7 @@ import Loading from "./assets/loading.json"
 import Error from "./assets/error.json"
 import ModalAlert from "./components/page-comp/ModalAlert";
 import { ToastContainer } from 'react-toastify';
-import { fetchUserOrders, fetchUserProfile } from "./store/userSlice/userSlice";
+import { fetchUserOrders, fetchUserProfile, fetchUsers } from "./store/userSlice/userSlice";
 import Sidebar from "./components/Sidebar";
 import { toggleSidebar } from "./store/actionSlice/actionSlice";
 import { IoIosArrowForward } from "react-icons/io";
@@ -21,6 +21,7 @@ const App = () => {
   const { pathname } = useLocation()
   const { loading: catLoading, error: catError } = useSelector(state => state.categories)
   const { loading: proLoading, error: proError } = useSelector(state => state.products)
+  const { loading: userAllLoading } = useSelector(state => state.users)
   const { userProfile, loading: userLoading } = useSelector(state => state.users)
   const { isSidebar } = useSelector(state => state.actions)
 
@@ -29,6 +30,9 @@ const App = () => {
     dispatch(fetchProducts())
     dispatch(fetchUserProfile())
     dispatch(fetchUserOrders())
+    if (pathname.slice(0, 6) === "/admin") {
+      dispatch(fetchUsers())
+    }
   }, [dispatch])
   return (
     <div className='p-[5px] font-mont bg-gray-100'>
@@ -45,7 +49,7 @@ const App = () => {
           </div>
         }
         <Content>
-          {catLoading || proLoading && userLoading ?
+          {catLoading || proLoading && userLoading && userAllLoading?
             <div className='min-h-[calc(100vh-150px)] flex justify-center items-center flex-col'>
               <div className='max-w-[200px]'>
                 <Player
