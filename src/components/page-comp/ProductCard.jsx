@@ -34,7 +34,7 @@ const ProductCard = ({ item, categoryName }) => {
             }} className={`w-[35px] h-[35px] flex justify-center items-center bg-black text-[18px] duration-150 text-white hover:scale-105 border-[1px] ${checkFavItem ? "border-red-400 bg-opacity-15" : "border-gray-200 bg-opacity-20"} hover:bg-opacity-15 rounded-full absolute top-[7px] right-[7px] active:scale-100`}>
                 {checkFavItem ? <AiFillHeart className="text-red-500" /> : <AiOutlineHeart />}
             </button>
-            <div className='absolute text-[12px] font-medium bg-black shadow-sm bg-opacity-45 text-white top-[10px] left-[10px] py-[2px] px-[5px] rounded-sm'>
+            <div className='absolute text-[12px] font-medium bg-black shadow-sm bg-opacity-40 backdrop-blur-[1px] text-white top-[10px] left-[10px] py-[2px] px-[5px] rounded-sm'>
                 {categoryName}
             </div>
             <div className="flex justify-center items-center p-[10px] border-b-[1px]">

@@ -13,7 +13,7 @@ const AdminCategoryCard = ({ item }) => {
             whileInView={{ opacity: [0, 1], y: [20, -5, 0] }}
             viewport={{ once: false, amount: 0.1 }}
             transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
-            key={item.id} className='border-[1px] p-[5px] rounded-[5px] border-indigo-100 shadow-sm bg-gradient-to-r from-indigo-100 to-blue-100'>
+            key={item.id} className='border-[1px] p-[5px] rounded-[5px] border-indigo-200 shadow-sm bg-gradient-to-r from-indigo-100 to-blue-100'>
             <div className='flex justify-start gap-[5px] h-full'>
                 <div className='border-[1px] rounded-md min-w-[115px] min-h-[115px] flex justify-center border-indigo-100 items-center bg-white'>
                     <img className='max-h-[100px] max-w-[115px] p-[5px]' src={item.image} alt={item.title} />

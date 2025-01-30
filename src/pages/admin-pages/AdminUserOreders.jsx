@@ -1,29 +1,71 @@
 import { AiOutlineClear } from "react-icons/ai";
 import { RiHistoryFill } from "react-icons/ri";
 import { MdHistory } from "react-icons/md";
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { errorToast, succsessToast } from "../../services/toastService";
-import axiosInstance from "../../api/axiosInstance";
-import { fetchUserOrders } from "../../store/userSlice/userSlice";
 import { motion } from "motion/react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { IoMdArrowBack } from "react-icons/io";
+import { BsCheck2All } from "react-icons/bs";
 
 
 const AdminUserOrders = () => {
-    const { orders } = useSelector(state => state.users)
-    const dispatch = useDispatch()
-
+    const { users, allOrders } = useSelector(state => state.users)
+    const { id } = useParams()
+    const selectUser = users.find(item => item._id == id)
+    const orders = allOrders.filter(item => item.userId === id)
+    
     return (
         <>
+            <div className='flex justify-between items-center gap-[2px] flex-col border-b-[1px] p-[7px]'>
+                {
+                    selectUser?.isActive ?
+                        <div className='flex-1 text-[14px] border-[1px] rounded-sm py-[5px] flex-col w-full px-[10px] bg-green-100 border-green-200 font-medium flex justify-center items-center'>
+                            <div className="flex justify-center items-center gap-1">
+                                <div>Account: </div>
+                                <div className="text-green-600 font-semibold flex justify-start items-center gap-1">
+                                    <span>Verified</span>
+                                    <span className="text-[18px]"><BsCheck2All /></span>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        <div className='flex-1 text-[14px] border-[1px] rounded-sm py-[5px] flex-col w-full px-[10px] bg-red-100 border-red-200 font-medium flex justify-center items-center'>
+                            <div className="flex justify-center items-center gap-1">
+                                <div>Account: </div>
+                                <div className="text-red-500 font-semibold">
+                                    Not verified !
+                                </div>
+                            </div>
+                        </div>
+
+                }
+                <div className='flex-1 text-[14px] font-medium flex justify-start items-center gap-1'>
+                    <span>User name: </span>
+                    <span className='font-semibold'>{selectUser?.userName}</span>
+                </div>
+                <div className='flex-1 text-[14px] font-medium flex justify-start items-center gap-1'>
+                    <span>Email: </span>
+                    <span className='font-semibold'>{selectUser?.email}</span>
+                </div>
+            </div>
             {orders?.length > 0 ?
-                (<div className="">
+                (<div className="p-[7px]">
                     <div className="flex justify-between items-center">
                         <h1 className="font-semibold my-1 flex justify-start items-center gap-1">
                             <span className="flex justify-center items-center text-[18px]"><MdHistory /></span>
-                            <span>Your order history</span>
+                            <span>Order history</span>
                         </h1>
+                        <Link to={-1}>
+                            <button className="px-[10px] py-[4px] font-medium my-[5px] text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
+                                <div>
+                                    <IoMdArrowBack />
+                                </div>
+                                <div>
+                                    Back
+                                </div>
+                            </button>
+                        </Link>
                     </div>
                     <div className="flex flex-col-reverse gap-[10px]">
                         {orders.map((order) => (

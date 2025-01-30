@@ -30,9 +30,6 @@ const App = () => {
     dispatch(fetchProducts())
     dispatch(fetchUserProfile())
     dispatch(fetchUserOrders())
-    if (pathname.slice(0, 6) === "/admin") {
-      dispatch(fetchUsers())
-    }
   }, [dispatch])
   return (
     <div className='p-[5px] font-mont bg-gray-100'>
@@ -49,7 +46,7 @@ const App = () => {
           </div>
         }
         <Content>
-          {catLoading || proLoading && userLoading && userAllLoading?
+          {catLoading || proLoading && userLoading?
             <div className='min-h-[calc(100vh-150px)] flex justify-center items-center flex-col'>
               <div className='max-w-[200px]'>
                 <Player

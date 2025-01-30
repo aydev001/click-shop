@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 
+
 const Content = ({ children }) => {
   const { selectCategoryId } = useSelector(state => state.actions)
   const scrollCont = useRef()
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   useEffect(() => {
     scrollCont.current.scrollTop = 0
   }, [selectCategoryId || pathname])

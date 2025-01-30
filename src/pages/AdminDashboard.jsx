@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NotFount from './NotFount'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router'
+import { fetchUserAllOrders, fetchUsers } from '../store/userSlice/userSlice'
+
 
 const AdminDashboard = () => {
     const { userProfile } = useSelector(state => state.users)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(fetchUsers())
+        dispatch(fetchUserAllOrders())
+    }, [dispatch])
 
     if (!userProfile?.isAdmin) {
         return (
@@ -15,7 +22,7 @@ const AdminDashboard = () => {
     }
     return (
         <div className=' text-gray-800'>
-            <Outlet/>
+            <Outlet />
         </div>
     )
 }

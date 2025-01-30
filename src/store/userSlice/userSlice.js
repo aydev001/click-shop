@@ -62,7 +62,7 @@ export const fetchUserAllOrders = createAsyncThunk("fetchUserAllOrders", async (
     const token = localStorage.getItem("authToken")
     if (token) {
         const baseUrl = process.env.VITE_BASE_URL
-        const responce = await axios.get(`${baseUrl}/users/get-orders`, {
+        const responce = await axios.get(`${baseUrl}/users/get-orders-admin`, {
             headers:
             {
                 Authorization: `Bearer ${token}`
@@ -103,6 +103,15 @@ const userSlice = createSlice({
             state.loading = false
             state.orders = action.payload
         }).addCase(fetchUserOrders.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
+        builder.addCase(fetchUserAllOrders.pending, (state) => {
+            state.loading = true
+        }).addCase(fetchUserAllOrders.fulfilled, (state, action) => {
+            state.loading = false
+            state.allOrders = action.payload
+        }).addCase(fetchUserAllOrders.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
         })

@@ -1,3 +1,4 @@
+import { CgSpinner } from "react-icons/cg"; 
 import { BiLeftArrowAlt } from "react-icons/bi";
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,8 +39,8 @@ const DeleteCategModal = () => {
           </div>
         </button>
         <button disabled={pending} onClick={() => handleDeleteCateg(selectItemId)} className={`${pending? "cursor-wait" : "cursor-pointer"} text-[12px] font-semibold flex justify-center  gap-1 items-center px-[10px] py-[4px] rounded-sm border-[1px] border-red-500 bg-red-500 hover:bg-red-600 hover:shadow-sm duration-75 active:scale-95 text-white`}>
-          <div className='flex justify-center items-center text-[14px]'>
-            <FaTrash />
+          <div className={`${pending? "animate-spin" : "animate-none"} flex justify-center items-center text-[14px]`}>
+            {pending? <CgSpinner /> : <FaTrash />}
           </div>
           <div>
             Yes
