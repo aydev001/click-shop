@@ -9,7 +9,7 @@ const AdminUsers = () => {
   const sortedUsers = [...users].sort((a, b) => b.isAdmin - a.isAdmin);
   const navigate = useNavigate()
   return (
-    <div className="p-[5px]">
+    <div className="p-[5px] overflow-x-auto">
       <table className="w-full min-w-[600px] shadow-sm rounded-sm overflow-hidden text-[14px]">
         <thead>
           <tr className="bg-blue-100 text-gray-700 border-[1px] border-blue-200">
