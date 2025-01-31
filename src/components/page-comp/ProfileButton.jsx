@@ -14,6 +14,7 @@ const ProfileButton = ({ userData }) => {
     const [isActive, setIsActive] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    
     const handleClickOutside = (event) => {
         if (!event.target.closest(".menu")) {
             setIsActive(false); // Menyu tashqarisiga bosilganda yopish
