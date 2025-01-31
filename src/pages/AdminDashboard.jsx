@@ -8,6 +8,7 @@ import { fetchUserAllOrders, fetchUsers } from '../store/userSlice/userSlice'
 const AdminDashboard = () => {
     const { userProfile } = useSelector(state => state.users)
     const dispatch = useDispatch()
+    
     useEffect(() => {
         dispatch(fetchUsers())
         dispatch(fetchUserAllOrders())

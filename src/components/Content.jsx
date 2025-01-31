@@ -9,7 +9,7 @@ const Content = ({ children }) => {
   const { pathname } = useLocation()
   useEffect(() => {
     scrollCont.current.scrollTop = 0
-  }, [selectCategoryId || pathname])
+  }, [selectCategoryId, pathname])
   return (
     <div ref={scrollCont} className='border-[1px] bg-white flex-1 rounded-md relative min-h-[calc(100vh-77px)] max-h-[calc(100vh-77px)] shadow-sm overflow-y-auto overflow-x-hidden mt-[5px]'>
       {children}
