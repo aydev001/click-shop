@@ -20,7 +20,7 @@ const AdminProducts = () => {
       </div>
       <div>
         {selectProducts.length > 0 ?
-          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2 px-[7px] mx-auto max-w-[1400px]'>
+          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2 px-[7px] pb-[7px] mx-auto max-w-[1400px]'>
             {selectCategoryId ?
               selectProducts.map(item => (
                 <AdminProductCard key={item.id} item={item} categoryName={categories.find(catItem => catItem.id === item.categoryId)?.name} />

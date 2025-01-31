@@ -50,14 +50,14 @@ const AdminUserOrders = () => {
                 </div>
             </div>
             {orders?.length > 0 ?
-                (<div className="p-[7px]">
-                    <div className="flex justify-between items-center">
-                        <h1 className="font-semibold my-1 flex justify-start items-center gap-1">
+                (<div className="px-[7px] pb-[7px]">
+                    <div className="flex justify-between items-center my-[5px] flex-row-reverse">
+                        <h1 className="font-semibold flex justify-start items-center gap-1">
                             <span className="flex justify-center items-center text-[18px]"><MdHistory /></span>
                             <span>Order history</span>
                         </h1>
                         <Link to={-1}>
-                            <button className="px-[10px] py-[4px] font-medium my-[5px] text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
+                            <button className="px-[10px] py-[4px] font-medium text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
                                 <div>
                                     <IoMdArrowBack />
                                 </div>
@@ -67,9 +67,9 @@ const AdminUserOrders = () => {
                             </button>
                         </Link>
                     </div>
-                    <div className="flex flex-col-reverse gap-[10px]">
+                    <div className="flex flex-col-reverse gap-[5px]">
                         {orders.map((order) => (
-                            <div key={order._id} className="bg-slate-50 border-[1px] shadow-sm rounded-md p-[10px] group">
+                            <div key={order._id} className="bg-slate-50 border-[1px] shadow-sm rounded-sm p-[10px] group">
                                 <div className="mb-1 flex justify-between items-center">
                                     <p className="text-[14px] font-medium text-gray-600">
                                         Created at: <span className="text-gray-800 font-semibold">{new Date(order.createdAt).toLocaleString("uz-UZ", { hour12: false })}</span><span className="bg-green-500 text-white font-semibold text-[12px] rounded-sm px-[5px] py-[2px] ml-[5px] hidden group-last:inline">new</span>
@@ -120,12 +120,12 @@ const AdminUserOrders = () => {
                     whileInView={{ opacity: [0, 1], y: [30, -10, 0] }}
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
-                    className="flex justify-center items-center flex-col text-gray-600 min-h-[calc(100vh-200px)]">
+                    className="flex justify-center items-center flex-col text-gray-500 min-h-[calc(100vh-200px)]">
                     <div className="text-[30px]">
                         <RiHistoryFill />
                     </div>
                     <div className="text-[14px] font-medium">
-                        Your order history is empty
+                        User order history is empty
                     </div>
                     <Link to={-1}>
                         <button className="px-[10px] py-[5px] font-medium mt-[10px] text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">

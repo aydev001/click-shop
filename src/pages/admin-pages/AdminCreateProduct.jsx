@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { errorToast, succsessToast } from "../../services/toastService";
-import { fetchCategories } from "../../store/categorySlice/categorySlice";
 import axiosInstance from "../../api/axiosInstance";
 import { closeModalAlert } from "../../store/actionSlice/actionSlice";
 import { fetchProducts } from "../../store/productSlice/productSlice";
@@ -112,8 +111,8 @@ const AdminCreateProduct = ({ baseData }) => {
                   <div className="px-[15px] min-w-max py-[3px] bg-indigo-100 duration-75 text-[14px] font-medium flex justify-center items-center cursor-pointer hover:bg-indigo-300 active:scale-95">
                     Upload image
                   </div>
-                  <div className="text-[12px] text-gray-600">
-                    {imageName}
+                  <div className="text-[12px]">
+                    {imageName==="mb"? <span className="text-red-500">Maximum image size 1 MB</span> : <span>{imageName}</span> }
                   </div>
                 </div>
               </label>
@@ -126,21 +125,34 @@ const AdminCreateProduct = ({ baseData }) => {
                 className="outline-none border-[2px] text-[14px] font-medium duration-100 hidden placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-[3px] py-[3px]"
                 onChange={(event) => {
                   const file = event.currentTarget.files[0];
-                  setFieldValue("image", file);
-                  // Rasmni oldindan ko‘rsatish
+                  const maxSizeMB = 1; // Maksimal fayl hajmi (MB)
+                  const maxSizeBytes = maxSizeMB * 1024 * 1024; // MB dan baytga o'tkazish
 
+                  // Fayl hajmini tekshirish
+                  if (file && file.size > maxSizeBytes) {
+                    setFieldValue("image", null); // Faylni tozalash
+                    setImageName("mb");
+                    setPreview(null);
+                    return; // Agar hajmi katta bo'lsa, davom etmang
+                  }
+
+                  setFieldValue("image", file);
+
+                  // Rasmni oldindan ko‘rsatish
                   if (file) {
                     const reader = new FileReader();
                     reader.onload = () => {
                       setPreview(reader.result);
-                      setImageName(file.name)
+                      setImageName(file.name);
                     };
                     reader.readAsDataURL(file);
                   }
                 }}
               />
               <div className="min-h-[10px] leading-[12px]">
-                {errors.image && touched.image && <span className="text-[12px] text-red-500 font-medium">{errors.image}</span>}
+                {errors.image && touched.image && (
+                  <span className="text-[12px] text-red-500 font-medium">{errors.image}</span>
+                )}
               </div>
             </div>
 

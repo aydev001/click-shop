@@ -11,7 +11,7 @@ import { closeModalAlert } from "../../store/actionSlice/actionSlice";
 const AdminCreateCategory = ({ baseData }) => {
   const dispatch = useDispatch();
   const [preview, setPreview] = useState(baseData ? baseData.image : null); // Rasmni oldindan ko‘rsatish uchun state
-  const [imageName, setImageName] = useState(baseData? baseData.name+".jpg" : "Image not uploaded")
+  const [imageName, setImageName] = useState(baseData ? baseData.name + ".jpg" : "Image not uploaded")
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required").min(3, "Minimum 3 characters").max(30, "Maximum 30 characters"),
     description: Yup.string().required("Description is required").min(3, "Minimum 3 characters").max(300, "Maximum 300 characters"),
@@ -83,7 +83,7 @@ const AdminCreateCategory = ({ baseData }) => {
                     Upload image
                   </div>
                   <div className="text-[12px]">
-                    {imageName}
+                    {imageName==="mb"? <span className="text-red-500">Maximum image size 1 MB</span> : <span>{imageName}</span> }
                   </div>
                 </div>
               </label>
@@ -96,24 +96,38 @@ const AdminCreateCategory = ({ baseData }) => {
                 className="outline-none border-[2px] text-[14px] font-medium duration-100 hidden placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-[3px] py-[3px]"
                 onChange={(event) => {
                   const file = event.currentTarget.files[0];
+                  const maxSizeMB = 1; // Maksimal fayl hajmi (MB)
+                  const maxSizeBytes = maxSizeMB * 1024 * 1024; // MB dan baytga o'tkazish
+
+                  // Fayl hajmini tekshirish
+                  if (file && file.size > maxSizeBytes) {
+                    setFieldValue("image", null); // Faylni tozalash
+                    setImageName("mb");
+                    setPreview(null);
+                    return; // Agar hajmi katta bo'lsa, davom etmang
+                  }
+
                   setFieldValue("image", file);
+
                   // Rasmni oldindan ko‘rsatish
-                  
                   if (file) {
                     const reader = new FileReader();
                     reader.onload = () => {
                       setPreview(reader.result);
-                      setImageName(file.name)
+                      setImageName(file.name);
                     };
                     reader.readAsDataURL(file);
                   }
                 }}
               />
               <div className="min-h-[10px] leading-[12px]">
-                {errors.image && touched.image && <span className="text-[12px] text-red-500 font-medium">{errors.image}</span>}
+                {errors.image && touched.image && (
+                  <span className="text-[12px] text-red-500 font-medium">{errors.image}</span>
+                )}
               </div>
             </div>
-            
+
+
             {/* NAME INPUT */}
             <div className="flex flex-col">
               <label className="text-[14px] font-semibold" htmlFor="name">Name</label>

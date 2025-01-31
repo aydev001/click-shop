@@ -1,14 +1,21 @@
+import { CgCloseR } from "react-icons/cg";
+import { MdClose } from "react-icons/md";
+import { ImCheckboxUnchecked } from "react-icons/im";
+import { FaCheckSquare } from "react-icons/fa";
+import { BsFillCheckSquareFill } from "react-icons/bs";
+import { RiCloseFill } from "react-icons/ri";
+import { FaCheckCircle } from "react-icons/fa";
 import React, { useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { FaExchangeAlt } from "react-icons/fa"; // Arrow icon
 import { motion } from "motion/react";
 
 
 const AdminUsers = () => {
-  
+
   const { users } = useSelector((state) => state.users);
-  
+
 
   // Adminlarni birinchi joylashtiramiz
   const sortedUsers = [...users].sort((a, b) => b.isAdmin - a.isAdmin);
@@ -67,10 +74,24 @@ const AdminUsers = () => {
                 {showEmail ? user.email : user.userName}
               </td>
               <td className="py-1 font-medium px-2 text-center border-r border-gray-300">
-                {user.isActive ? "✅" : "❌"}
+                {user.isActive ?
+                  <div className="text-green-500 flex justify-center items-center text-[16px]">
+                    <FaCheckSquare />
+                  </div>
+                  :
+                  <div className="text-red-500 flex justify-center items-center text-[16px]">
+                    <CgCloseR />
+                  </div>}
               </td>
               <td className="py-1 font-medium px-2 text-center">
-                {user.isAdmin ? "✅" : "❌"}
+                {user.isAdmin ?
+                  <div className="text-green-500 flex justify-center items-center text-[16px]">
+                    <FaCheckSquare />
+                  </div>
+                  :
+                  <div className="text-red-500 flex justify-center items-center text-[16px]">
+                    <CgCloseR />
+                  </div>}
               </td>
             </tr>
           ))}
