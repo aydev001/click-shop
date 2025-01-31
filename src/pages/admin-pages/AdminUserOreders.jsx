@@ -14,10 +14,15 @@ const AdminUserOrders = () => {
     const { id } = useParams()
     const selectUser = users.find(item => item._id == id)
     const orders = allOrders.filter(item => item.userId === id)
-    
+
     return (
         <>
-            <div className='flex justify-between items-center gap-[2px] flex-col border-b-[1px] p-[7px]'>
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: [0, 1], y: [10, -5, 0] }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
+                className='flex justify-between items-center gap-[2px] flex-col border-b-[1px] p-[7px]'>
                 {
                     selectUser?.isActive ?
                         <div className='flex-1 text-[14px] border-[1px] rounded-sm py-[5px] flex-col w-full px-[10px] bg-green-100 border-green-200 font-medium flex justify-center items-center'>
@@ -48,9 +53,14 @@ const AdminUserOrders = () => {
                     <span>Email: </span>
                     <span className='font-semibold'>{selectUser?.email}</span>
                 </div>
-            </div>
+            </motion.div>
             {orders?.length > 0 ?
-                (<div className="px-[7px] pb-[7px]">
+                (<motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: [0, 1], y: [10, -5, 0] }}
+                    viewport={{ once: false, amount: 0.1 }}
+                    transition={{ duration: 0.6, ease: "easeInOut", delay: 0.3 }}
+                    className="px-[7px] pb-[7px]">
                     <div className="flex justify-between items-center my-[5px] flex-row-reverse">
                         <h1 className="font-semibold flex justify-start items-center gap-1">
                             <span className="flex justify-center items-center text-[18px]"><MdHistory /></span>
@@ -113,7 +123,7 @@ const AdminUserOrders = () => {
                             </div>
                         ))}
                     </div>
-                </div>)
+                </motion.div>)
                 :
                 (<motion.div
                     initial={{ opacity: 0, y: 30 }}

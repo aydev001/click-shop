@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import * as Yup from "yup"
 import { errorToast, succsessToast } from "../../services/toastService";
 import axios from "axios";
-import { fetchUserProfile } from "../../store/userSlice/userSlice";
+import { fetchUserOrders, fetchUserProfile } from "../../store/userSlice/userSlice";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -38,6 +38,7 @@ const Login = () => {
                         resetForm()
                         dispatch(closeModalAlert())
                         dispatch(fetchUserProfile())
+                        dispatch(fetchUserOrders())
                         succsessToast("You have successfully logged in")
                     } catch (error) {
                         console.log(error)
